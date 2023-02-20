@@ -45,22 +45,30 @@ namespace test.convert
                 {
                     //○関数A（整数：あ，真理値：B，実数：C，文字：D，文字列：E）
                     case var x when Regex.IsMatch(row, FuncConv.pattern):
-                        ret.Add(FuncConv.convert(row));
+						for(; level > 0; level--)
+						{
+							ret.Add(new string(' ', 4 * (level - 1)) + "}");
+						}
+						ret.Add(FuncConv.convert(row));
                         level++;
                         break;
 
                     //整数：A ← 10
                     case var x when Regex.IsMatch(row, VarConv.pattern):
-
                         ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(VarConv.convert(row,level), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
                         break;
 
-                    //A ← B + 10
-                    case var x when Regex.IsMatch(row, AssignConv.pattern):
-                        ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(AssignConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
-                        break;
+					//A ← B + 10
+					case var x when Regex.IsMatch(row, AssignConv.pattern):
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(AssignConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+						break;
 
-                    default:
+					//A ← B + 10
+					case var x when Regex.IsMatch(row, OutputConv.pattern):
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(OutputConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+						break;
+
+					default:
                         ret.Add(row);
                         break;
                 }

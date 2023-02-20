@@ -80,7 +80,7 @@ namespace test
         {
             try
             {
-                global.Console.AppendText("スクリプト実行...\r\n");
+                global.Console.AppendText("スクリプト実行\r\n");
                 global.Console.AppendText("-----------------------------------------------\r\n");
 
                 await csharpScript.RunAsync(globals:global);

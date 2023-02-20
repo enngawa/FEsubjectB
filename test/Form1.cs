@@ -114,5 +114,10 @@ namespace test
 
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DConsole.Text = "";
+        }
     }
 }
