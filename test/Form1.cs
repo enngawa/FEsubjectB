@@ -49,6 +49,7 @@ namespace test
                 case (char)Keys.Enter: 
                     e.Handled = true;
 
+                    //改行時に前行のインデントを維持する
 					int spaces = 0;
 					string line = richTextBox1.Lines[richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart-1)];
 					foreach(char c in line)
@@ -66,6 +67,8 @@ namespace test
 					// 次の行に同じ数のスペースをコピーする
 					richTextBox1.SelectedText = new string(' ', spaces);
 					break;
+
+                //自動的に置換する
                 case (char)Keys.Tab: 
                     e.Handled = true;
                     richTextBox1.SelectedText = new string(' ', 4);
