@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +46,28 @@ namespace test
 
             switch (e.KeyChar)
             {
-                case (char)Keys.Tab: e.Handled = true;
+                case (char)Keys.Enter: 
+                    e.Handled = true;
+
+					int spaces = 0;
+					string line = richTextBox1.Lines[richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart-1)];
+					foreach(char c in line)
+					{
+						if(char.IsWhiteSpace(c))
+						{
+							spaces++;
+						}
+						else
+						{
+							break;
+						}
+					}
+
+					// 次の行に同じ数のスペースをコピーする
+					richTextBox1.SelectedText = new string(' ', spaces);
+					break;
+                case (char)Keys.Tab: 
+                    e.Handled = true;
                     richTextBox1.SelectedText = new string(' ', 4);
                     break;
 
