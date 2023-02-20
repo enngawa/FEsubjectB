@@ -57,4 +57,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>大域：整数：aaa ← 10
+
+aaaを出力する
+aaa←関数A（10，true，10.24，'A'，"ABC"）
+aaaを出力する
+aaa←関数B（10，true，10.24，'A'，"ABC"）
+aaaを出力する
+
+○関数A（整数：A，真理値：B，実数：C，文字：D，文字列：E）
+    整数：bbb←20
+    aaa ← aaa ＋ bbb
+    return aaa
+
+○関数B（整数：A，真理値：B，実数：C，文字：D，文字列：E）
+    整数：bbb←20
+    aaa ← aaa － bbb
+    return aaa</value>
+  </data>
 </root>

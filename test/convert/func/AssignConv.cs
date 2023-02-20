@@ -13,8 +13,6 @@ namespace test.convert.func
 
         public static string convert(string input = "A←1")
         {
-            MatchCollection a = Regex.Matches(input, pattern);
-
             string result = Regex.Replace(input, pattern, match =>
             {
                 string varName = match.Groups[1].Value;

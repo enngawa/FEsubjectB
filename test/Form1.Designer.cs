@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.DConsole = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
@@ -84,8 +85,7 @@
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.Size = new System.Drawing.Size(560, 571);
 			this.richTextBox1.TabIndex = 4;
-			this.richTextBox1.Text = "大域：整数：aaa ← 10\naaaとaaa × 128を出力する\n○関数A（整数：あ，真理値：B，実数：C，文字：D，文字列：E）\n    整数：bbb←20\n" +
-    "    aaa←bbb";
+			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
 			this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
 			// 
 			// Form1

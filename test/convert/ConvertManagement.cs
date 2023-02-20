@@ -52,9 +52,13 @@ namespace test.convert
 						ret.Add(FuncConv.convert(row));
                         level++;
                         break;
+					//aaa ← 関数A（10，true，10.24，"A"，"ABC"）
+					case var x when Regex.IsMatch(row, EFuncConv.pattern):
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(EFuncConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+						break;
 
-                    //整数：A ← 10
-                    case var x when Regex.IsMatch(row, VarConv.pattern):
+					//整数：A ← 10
+					case var x when Regex.IsMatch(row, VarConv.pattern):
                         ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(VarConv.convert(row,level), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
                         break;
 
@@ -63,9 +67,14 @@ namespace test.convert
 						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(AssignConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
 						break;
 
-					//A ← B + 10
+					//AとBを出力する
 					case var x when Regex.IsMatch(row, OutputConv.pattern):
 						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(OutputConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+						break;
+
+					//return x + 5
+					case var x when Regex.IsMatch(row, ReturnConv.pattern):
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(ReturnConv.convert(ref ret,row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
 						break;
 
 					default:

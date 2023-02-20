@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,36 +8,28 @@ using System.Threading.Tasks;
 
 namespace test.convert.func
 {
-    internal class FuncConv
+    internal class EFuncConv
     {
-        public static string pattern = @"○(\w+)\（((\w+)：(\w+)(，\w+：\w+)*)*）";
+        public static string pattern = @"^((?<A>.*)←)?(?<B>[\w_]+)（(?<C>[\s\S]*)）$";
 
-        // マッピングする引数の型
-        private static Dictionary<string, string> TypeMap = new Dictionary<string, string>
+        public static string convert(string input = "AAA←関数名（true，1，34，\"A\"）")
         {
-            { "整数", "int" },
-            { "真理値", "bool" },
-            { "実数", "double" },
-            { "文字", "char" },
-            { "文字列", "string" },
-        };
+			string result = Regex.Replace(input, pattern, match =>
+			{
+				string varName = match.Groups["A"].Value;
+				string functionName = match.Groups["B"].Value;
+				string argsString = match.Groups["C"].Value.Replace("，", ", ");
 
-        public static string convert(string input = "○関数A（整数：あ，真理値：B，実数：C，文字：D，文字列：E）")
-        {
-            string result = Regex.Replace(input, pattern, match =>
-            {
-                string methodName = match.Groups[1].Value;
-                string args = match.Groups[2].Value;
-                string[] argsList = args.Split('，');
-                string arguments = string.Join(",", argsList.Select(x =>
-                {
-                    string[] pair = x.Split('：');
-                    return $"{TypeMap[pair[0]]} {pair[1]}";
-                }));
-                return $"public void {methodName}({arguments}){{";
-            });
+				if(String.IsNullOrEmpty(varName)){
+					return $"{functionName}({argsString});";
+				}
+				else
+				{
+					return $"{varName} = {functionName}({argsString});";
+				}
+			});
 
-            return result;
-        }
+			return result;
+		}
     }
 }
