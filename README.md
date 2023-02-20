@@ -1,5 +1,5 @@
 # 基本情報科目Bの疑似言語実行環境
-![image](https://user-images.githubusercontent.com/75883535/220141244-2074a043-aa5d-473c-b8b2-6d10a59427ce.png)
+![image](https://user-images.githubusercontent.com/75883535/220141417-9bca159e-da07-44cd-bab6-ed3c26949683.png)
 
 ## 実装された内容
 - 関数の定義
