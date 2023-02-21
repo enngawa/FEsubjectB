@@ -20,7 +20,7 @@ namespace test.convert.func
 			{
 				return match.Groups["A"].Value;			
 			});
-			string valtypes = String.Join("|", convType.TypeMap.Select(x => { return x.Value; }));
+			string valtypes = String.Join("|", convTypes.TypeMap.Select(x => { return x.Value; }));
 			string valType = "";
 
 			string csharppattern = $"(public|private)\\s(?<A>{valtypes})\\s([\\s\\S]*)";

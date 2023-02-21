@@ -19,12 +19,21 @@ namespace test.convert.func
                 string methodName = match.Groups[1].Value;
                 string args = match.Groups[2].Value;
                 string[] argsList = args.Split('，');
-                string arguments = string.Join(",", argsList.Select(x =>
+
+                if(argsList.Length > 1)
                 {
-                    string[] pair = x.Split('：');
-                    return $"{convType.TypeMap[pair[0]]} {pair[1]}";
-                }));
-                return $"public void {methodName}({arguments}){{";
+					string arguments = string.Join(",", argsList.Select(x =>
+					{
+						string[] pair = x.Split('：');
+						return $"{convTypes.TypeMap[pair[0]]} {pair[1]}";
+					}));
+					return $"public void {methodName}({arguments}){{";
+                }
+                else
+                {
+                    return $"public void {methodName}(){{";
+                }
+                
             });
 
             return result;

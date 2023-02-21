@@ -43,8 +43,20 @@ namespace test.convert
             {
                 switch (row)
                 {
-                    //○関数A（整数：あ，真理値：B，実数：C，文字：D，文字列：E）
-                    case var x when Regex.IsMatch(row, FuncConv.pattern):
+					//while（aが0以上）
+					case var x when Regex.IsMatch(row, WhileConv.pattern):
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(WhileConv.convert(row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+                        level++;
+						break;
+
+					//endwhile
+					case var x when Regex.IsMatch(row, EndConv.pattern):
+                        level--;
+						ret.Add(new string(' ', 4 * (level)) + EndConv.convert(row));
+						break;
+
+					//○関数A（整数：あ，真理値：B，実数：C，文字：D，文字列：E）
+					case var x when Regex.IsMatch(row, FuncConv.pattern):
 						for(; level > 0; level--)
 						{
 							ret.Add(new string(' ', 4 * (level - 1)) + "}");
@@ -74,8 +86,8 @@ namespace test.convert
 
 					//return x + 5
 					case var x when Regex.IsMatch(row, ReturnConv.pattern):
-						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(ReturnConv.convert(ref ret,row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
-						break;
+						ret.Add(new string(' ', 4 * (level)) + replacements.Aggregate(ReturnConv.convert(ref ret, row), (current, replacement) => current.Replace(replacement.Key, replacement.Value)));
+						break;					
 
 					default:
                         ret.Add(row);

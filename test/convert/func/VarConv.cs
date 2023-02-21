@@ -10,7 +10,7 @@ namespace test.convert.func
 {
     internal class VarConv
     {
-        public static string pattern = @"^((?<A>大域|局所)：)?(?<B>整数|真理値|実数|文字|文字列)：(?<C>[^←]+)(←(?<D>.*))?$";
+        public static string pattern = $"^((?<A>大域|局所)：)?(?<B>{String.Join("|",convTypes.TypeMap.Keys.ToList())})：(?<C>[^←]+)(←(?<D>.*))?$";
 
         public static string convert(string input = "整数：A←1",int level = 0)
         {
@@ -25,11 +25,11 @@ namespace test.convert.func
                 {
 					if(level == 0)
 					{
-						return $"{globalType} {convType.TypeMap[typeName]} {String.Join(", ", varName)};";
+						return $"{globalType} {convTypes.TypeMap[typeName]} {String.Join(", ", varName)};";
 					}
 					else
 					{
-						return $"{convType.TypeMap[typeName]} {String.Join(", ", varName)};";
+						return $"{convTypes.TypeMap[typeName]} {String.Join(", ", varName)};";
 					}
                 }
                 else if(varName.Length == 1)
@@ -43,16 +43,16 @@ namespace test.convert.func
 
                     if (level == 0)
                     {
-                        return $"{globalType} {convType.TypeMap[typeName]} {varName[0]} = {initValue};";
+                        return $"{globalType} {convTypes.TypeMap[typeName]} {varName[0]} = {initValue};";
                     }
                     else
                     {
-                        return $"{convType.TypeMap[typeName]} {varName[0]} = {initValue};";
+                        return $"{convTypes.TypeMap[typeName]} {varName[0]} = {initValue};";
                     }
                 }
                 else
                 {
-					return $"{convType.TypeMap[typeName]} {String.Join(", ", varName)}　= {initValue};";
+					return $"{convTypes.TypeMap[typeName]} {String.Join(", ", varName)}　= {initValue};";
 				}
             });
 

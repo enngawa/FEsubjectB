@@ -63,18 +63,16 @@
 aaaを出力する
 aaa ← 関数A（10，true，10.24，'A'，"ABC"）
 aaaを出力する
-aaa ← 関数B（10，true，10.24，'A'，"ABC"）
-aaaを出力する
+
+while（aaa＋5が5以上）
+    aaa ← aaa － 1
+    aaaを出力する
+endwhile
 
 ○関数A（整数：A，真理値：B，実数：C，文字：D，文字列：E）
-    整数：bbb ← 20
-    aaa ← aaa ＋ bbb
-    return aaa
-
-○関数B（整数：A，真理値：B，実数：C，文字：D，文字列：E）
-    整数：bbb ← 20
-    aaa ← （aaa － bbb）× 5
-    return aaa 
-    </value>
+    整数：bbb ← 2
+    AとBとCとDとEを出力する
+    aaa ← aaa ÷ bbb
+    return aaa</value>
   </data>
 </root>

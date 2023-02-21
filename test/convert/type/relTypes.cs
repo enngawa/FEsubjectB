@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace test.convert.type
 {
-	public class convType
+	public static class relTypes
 	{
 		// マッピングする引数の型
 		public static Dictionary<string, string> TypeMap = new Dictionary<string, string>
 		{
-			{ "整数", "int" },
-			{ "真理値", "bool" },
-			{ "実数", "double" },
-			{ "文字", "char" },
-			{ "文字列", "string" },
+			{ "より大きい", ">" },
+			{ "以上", ">=" },
+			{ "より小さい", "<" },
+			{ "以下", "<=" },
+			{ "等しい", "==" },
+			{"等しくない", "!=" }
 		};
 	}
 }
